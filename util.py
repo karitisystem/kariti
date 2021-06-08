@@ -791,16 +791,29 @@ def getAnswers(img):
                         #ser comparada
                         if i > 0:
                             if answ[i][1][1] != answ[i-1][1][1]:
-                                counter += 1
+                                # Evita de aumentar os índices em mais de uma unidade por vez
+                                if counter == gabarito_aluno[i-1][0]:
+                                    counter += 1
                         gabarito_aluno.append((counter, letters[j]))
             #Senão, gabarito na posição i recebe apenas o contador (indicando
             # a qual questão corresponde essa resposta
             else:
-                counter += 1
-                gabarito_aluno.append((counter, 0))
+                # Se não for a primeira ocorrência, conta antes de adicionar
+                if i != 0:
+                    # Evita de aumentar os índices em mais de uma unidade por vez
+                    if counter == gabarito_aluno[i-1][0]:
+                        counter += 1
+                    gabarito_aluno.append((counter, 0))
+                # Se for a primeira ocorrência, conta depois de adicionar
+                else:
+                    gabarito_aluno.append((counter, 0))
+                    # Evita de aumentar os índices em mais de uma unidade por vez
+                    if counter == gabarito_aluno[i-1][0]:
+                        counter += 1
+
     else:
         gabarito_aluno = []
-
+    print(gabarito_aluno)
     return gabarito_aluno
 
 
