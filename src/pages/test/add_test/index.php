@@ -61,7 +61,7 @@
      ?>
      <section class="window">
        <div class="container all">
-        <form action="addTemplate.php" method="post">
+        <form action="add_template.php" method="post">
           <div class="title">CADASTRO DE PROVA</div>
             <div class="inner_container">
               <input type="text" placeholder="Digite o nome da Prova" class="input_text" name="test_name" required>

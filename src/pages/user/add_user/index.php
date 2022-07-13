@@ -32,7 +32,7 @@
         }
        ?>
       <div class="container all">
-        <form action="setAddUser.php" method="post">
+        <form action="settings.php" method="post">
           <div class="title">CADASTRO DE USUÁRIO</div>
           <div class="inner_container">
             <input class="input_text" type="text" placeholder="Digite o seu nome de usuário" name="nick_user" required>
