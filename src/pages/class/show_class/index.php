@@ -93,12 +93,13 @@
             echo '<tbody>';
           	for ($i = 0; $i < count($rows); $i++) {
             echo '<tr id="'.str_replace("'", "",$tr_id[$i]).'">';
+
             echo '<td>';
-          	echo '<a href="edit_class?id_class='.$rows[$i]['id_turma'].'"><img src="../../../assets/Icons/editar.svg" height=20></a>';
+            echo '<a onclick="return confirm(\'Deseja realmente apagar '. $rows[$i]["nome_turma"].'?\');" href="delete_class/settings.php?id_class='.$rows[$i]['id_turma'].'"><img src="../../../assets/Icons/excluir.svg" height=20></a>';
             echo '</td>';
 
             echo '<td>';
-        		echo '<a onclick="return confirm(\'Deseja realmente apagar '. $rows[$i]["nome_turma"].'?\');" href="delete_class/settings.php?id_class='.$rows[$i]['id_turma'].'"><img src="../../../assets/Icons/excluir.svg" height=20></a>';
+          	echo '<a href="edit_class?id_class='.$rows[$i]['id_turma'].'"><img src="../../../assets/Icons/editar.svg" height=20></a>';
             echo '</td>';
 
             echo '<td>';
