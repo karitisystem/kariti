@@ -65,7 +65,7 @@
     		header('Location:errorPage.php');
     	}
 
-    	header('Location: addStudent.php?message='.$_GET['message']);
+    	header('Location: ./?message='.$_GET['message']);
 
     ?>
 

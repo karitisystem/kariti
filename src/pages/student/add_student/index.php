@@ -55,7 +55,7 @@
         }
        ?>
       <div class="container all">
-        <form enctype="multipart/form-data" action="setAddStudentCSV.php" method="POST">
+        <form enctype="multipart/form-data" action="add_student_CSV.php" method="POST">
           <div class="title">CADASTRO DE ALUNO POR CSV</div>
           <div class="inner_container contour">
             <div class="div_file">
@@ -67,7 +67,7 @@
               <span class="file_legend" id="file_legend">Clique aqui para selecionar o arquivo CSV contendo os alunos.</span>
             </div>
 
-            <a href="students_list_one.csv" download="Modelo Estudantes CSV(não modifica a formatação).csv"><input class="button button_file" type="button" value="Baixar Modelo CSV" /></a>
+            <a href="../../../assets/docs/students_list_one.csv" download="Modelo Estudantes CSV(não modifica a formatação).csv"><input class="button button_file" type="button" value="Baixar Modelo CSV" /></a>
             <input class="button" onclick="callLoading('CADASTRANDO ALUNOS')" type="submit" value="CADASTRAR CSV" />
           </div>
         </form>
