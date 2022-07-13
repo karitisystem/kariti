@@ -48,7 +48,6 @@
         }
         
         header('Location: ../menu');
-        // header('Location: ../menu?message='.$_GET['message']);
     ?>
 
   </body>

@@ -18,7 +18,7 @@
 
         try{
         //define PDO - tell about the database file
-        $pdo = new PDO('sqlite:database.db');
+        $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
         //write SQL
         $statement = $pdo->query("SELECT id_turma FROM turma WHERE nome_turma='".$class_name."' AND id_usuario='".$id_user."'");
@@ -43,7 +43,7 @@
       function getClassId($class_name){
         try{
           //define PDO - tell about the database file
-          $pdo = new PDO('sqlite:database.db');
+          $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
           //write SQL
           $statement = $pdo->query("SELECT id_turma FROM turma WHERE nome_turma='".$class_name."'");
@@ -75,7 +75,7 @@
       try{
         if(verifyClass($class_name, $id_user)){
           //define PDO - tell about the database file
-          $pdo = new PDO('sqlite:database.db');
+          $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
           //Execute the query
           $pdo->exec($sql);
@@ -100,7 +100,7 @@
 
         try{
           //define PDO - tell about the database file
-          $pdo = new PDO('sqlite:database.db');
+          $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
           //Execute the query
           $pdo->exec($sql);
@@ -113,7 +113,7 @@
           header('Location:errorPage.php?message='.$_GET['message']);
         }
       }
-      header('Location: addClass.php?message='.$_GET['message']);
+      header('Location: ./?message='.$_GET['message']);
 
      ?>
   </body>

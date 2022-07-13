@@ -67,7 +67,7 @@
               }else{
                 keys_str += keys[i].trim();
               }
-              ajaxRequest('setAddClassCSV.php?keys=' + keys_str, 'retorno');
+              ajaxRequest('../../add_class/add_class_CSV.php?keys=' + keys_str, 'retorno');
             }
           }
           reader.readAsText(input.files[0]);
@@ -201,11 +201,11 @@
                <label for="csv_file"><span class="button button_file">Procurar Arquivo</span></label>
                <span class="file_legend" id="file_legend">Clique aqui para selecionar o arquivo CSV contendo os alunos.</span>
            </div>
-           <a href="students_class.csv" download="Modelo Turma CSV(não modifica a formatação).csv"><input class="button button_file" type="button" value="Baixar Modelo CSV" /></a>
+           <a href="../../../../assets/docs/students_class.csv" download="Modelo Turma CSV(não modifica a formatação).csv"><input class="button button_file" type="button" value="Baixar Modelo CSV" /></a>
            <a class="button" href="#divList" onclick="cadastraCSV()">CADASTRAR CSV</a>
           </div>
 
-          <form action="setEditClass.php?id_class=<?php echo $id_class_edit; ?>" method="post">
+          <form action="settings.php?id_class=<?php echo $id_class_edit; ?>" method="post">
             <div class="title">EDIÇÃO DE TURMA</div>
             <div class="inner_container">
               <input type="text" class="input_text" placeholder="Digite o nome da turma" value="<?php echo $class[0]['nome_turma']; ?>" name="class_name" required>

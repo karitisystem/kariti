@@ -92,7 +92,7 @@
     		$_SESSION['error'] = $e;
     		header('Location:errorPage.php');
     	}
-      header('Location:searchTest.php?message='.$_GET['message']);
+      header('Location:../search_test?message='.$_GET['message']);
      ?>
 
 

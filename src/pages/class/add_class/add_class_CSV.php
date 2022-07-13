@@ -10,12 +10,11 @@
 
   function getStudent($key, $id_user){
   	try{
-      //echo $key;
       //Se for e email
       $sql = "SELECT id_aluno FROM aluno WHERE id_usuario='".$id_user."' AND (email_aluno='".$key."' OR nome_aluno='".$key."' OR matricula_aluno='".$key."')";
 
   		//define PDO - tell about the database file
-  		$pdo = new PDO('sqlite:database.db');
+  		$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
   		//write SQL
   		$statement = $pdo->query($sql);
@@ -60,30 +59,15 @@
 		$error = $e;
 	}
 
-
-  $str = '';
+  $ids = '';
   for($i = 0; $i < count($id_students); $i++){
     if($i != 0){
-      $str .= 'schlussel'.$id_students[$i];
+      $ids .= 'schlussel'.$id_students[$i];
     }else{
-      $str .= $id_students[$i];
+      $ids .= $id_students[$i];
     }
   }
-    echo $str;
+    echo $ids;
 
-  /*
-  if(isset($_GET['id_class'])){
-    $id_class = $_GET['id_class'];
-    $url = 'Location: editClass.php?id_class='.$id_class.'&';
-  }else{
-    $url = 'Location: addClass.php?';
-  }
-
-  for($i = 0; $i < count($id_students); $i++){
-    $url .= 'id_students[]='.$id_students[$i];
-    if(!($i == count($id_students)-1)){
-      $url .= '&';
-    }
-  }*/
 
 ?>

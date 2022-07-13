@@ -21,7 +21,7 @@
     <?php
     	if(!isset($_SESSION['name_user'])){
     		$_GET['message'] = '<font color="red">VOCÊ PRECISA ESTAR LOGADO PARA ACESSAR</font><br>';
-    		header('Location: login.php?message='.$_GET['message']);
+    		header('Location: ../login?message='.$_GET['message']);
     		die();
     	}
 
@@ -82,7 +82,7 @@
         </ul>
       </nav>
     </div>
-    <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../assets/Icons/fechar.svg" class="icon_fechar"></a>
+    <a href='../../services/disconect' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../assets/Icons/fechar.svg" class="icon_fechar"></a>
   </div>
 </section>
   </body>

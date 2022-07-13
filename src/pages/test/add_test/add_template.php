@@ -3,7 +3,7 @@
 <html lang="pt-br" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../../styles/styles.css">
     <script>
 
       function sumGrades(ids){
@@ -25,11 +25,11 @@
   <body>
     <?php
       if(!isset($_SESSION['name_user'])){
-      $_GET['message'] = '<font color="red">VOCÊ PRECISA ESTAR LOGADO PARA ACESSAR</font><br>';
-      header('Location: login.php');
-      die();
+        $_GET['message'] = '<font color="red">VOCÊ PRECISA ESTAR LOGADO PARA ACESSAR</font><br>';
+        header('Location: login.php');
+        die();
       }
-
+      
       $test_name = $_POST['test_name'];
       $class_name = explode(';', $_POST['class_name'])[1];
       $id_class = trim(explode(';', $_POST['class_name'])[0]);
@@ -40,7 +40,7 @@
      <section class="window">
        <div class="container all container_extended">
          <div class="inner_container">
-           <form enctype="multipart/form-data" action="setAddTest.php" method="POST">
+           <form enctype="multipart/form-data" action="settings.php" method="POST">
                <div class="title">CADASTRO DE GABARITO</div>
 
                <input type="hidden" name="test_name" value="<?php echo $test_name ?>">
@@ -97,8 +97,8 @@
                <input type="submit" value="CADASTRAR PROVA" class="button"/>
            </form>
          </div>
-         <a href='javascript:history.go(-1)'><img src="images/Icons/voltar.svg" class="icon_voltar"></a>
-         <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="images/Icons/fechar.svg" class="icon_fechar"></a>
+         <a href='javascript:history.go(-1)'><img src="../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
+         <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
        </div>
      </section>
   </body>

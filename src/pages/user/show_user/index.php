@@ -89,18 +89,19 @@
             echo '<tbody>';
           	for ($i = 0; $i < count($rows); $i++) {
             echo '<tr id="'.str_replace("'", "",$tr_id[$i]).'">';
+            
+            if($rows[$i]['id_usuario'] != '1'){
+              echo '<td>';
+              echo '<a onclick="return confirm(\'Deseja realmente apagar '.$rows[$i]["nome"].'?\');" href="deleteUser.php?id_user='.$rows[$i]['id_usuario'].'"><img src="../../../assets/Icons/excluir.svg" height=20> </a>';
+              echo '</td>';
+            }else {
+              echo '</td>';
+              echo '<td>';
+            }
+            
             echo '<td>';
-          	echo '<a href="edit_user?id_user='.$rows[$i]['id_usuario'].'"><img src="../../../assets/Icons/editar.svg" height=20> </a>';
+            echo '<a href="edit_user?id_user='.$rows[$i]['id_usuario'].'"><img src="../../../assets/Icons/editar.svg" height=20> </a>';
             echo '</td>';
-
-            	if($rows[$i]['id_usuario'] != '1'){
-                echo '<td>';
-            		echo '<a onclick="return confirm(\'Deseja realmente apagar '.$rows[$i]["nome"].'?\');" href="deleteUser.php?id_user='.$rows[$i]['id_usuario'].'"><img src="../../../assets/Icons/excluir.svg" height=20> </a>';
-                echo '</td>';
-            	}else {
-                echo '</td>';
-                echo '<td>';
-              }
 
             echo '<td>';
           	echo $rows[$i]['nome'];

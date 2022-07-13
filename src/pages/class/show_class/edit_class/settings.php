@@ -17,7 +17,7 @@
 
     		try{
     		//define PDO - tell about the database file
-    		$pdo = new PDO('sqlite:database.db');
+    		$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
         $id_user = $_SESSION['id_user'];
 
@@ -51,7 +51,7 @@
 
     		try{
     		//define PDO - tell about the database file
-    		$pdo = new PDO('sqlite:database.db');
+    		$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
     		//write SQL
     		$statement = $pdo->query("SELECT id_prova FROM aluno_prova WHERE id_aluno='".$id_student."'");
@@ -89,7 +89,7 @@
       function getStudentAtClass($id_class){
         try{
           //define PDO - tell about the database file
-          $pdo = new PDO('sqlite:database.db');
+          $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
           //write SQL
           $statement = $pdo->query("SELECT id_aluno FROM aluno_turma WHERE id_turma='".$id_class."'");
@@ -122,7 +122,7 @@
           $sql = "UPDATE turma SET nome_turma = '".$class_name."', nome_curso = '".$course_class."' WHERE id_turma='".$id_class."'";
 
           //define PDO - tell about the database file
-      		$pdo = new PDO('sqlite:database.db');
+      		$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       		//Execute the query
       		$pdo->exec($sql);
@@ -171,7 +171,7 @@
     		header('Location:errorPage.php');
     		die();
     	}
-      header('Location: editClass.php?message='.$_GET['message'].'&id_class='.$id_class);
+      header('Location: ./?message='.$_GET['message'].'&id_class='.$id_class);
 
     ?>
 

@@ -13,7 +13,7 @@
       }
 
       // Getting settings to send email
-      $ini_file = parse_ini_file('settings.ini', true);
+      $ini_file = parse_ini_file('../../../settings.ini', true);
       $cut_path_l = $ini_file['SYSTEM']['cut_path_l'];
       $cut_path_w = $ini_file['SYSTEM']['cut_path_w'];
 
@@ -22,7 +22,7 @@
 
         try{
         //define PDO - tell about the database file
-        $pdo = new PDO('sqlite:database.db');
+        $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
         //write SQL
         $statement = $pdo->query("SELECT id_aluno FROM aluno WHERE matricula_aluno='".$registration."' AND id_usuario='".$id_user."'");
@@ -94,7 +94,7 @@
       	try{
       		if(verifyUser($registration, $id_user)){
       			//define PDO - tell about the database file
-      			$pdo = new PDO('sqlite:database.db');
+      			$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       			//Execute the query
       			$pdo->exec($sql);
@@ -111,7 +111,7 @@
       	}
 
       }
-      header('Location: viewStudent.php?message='.$_GET['message']);
+      header('Location: ../show_student?message='.$_GET['message']);
     ?>
 
   </body>
