@@ -1,16 +1,23 @@
 #-*- coding: utf-8 -*-
+
+
 try:
     import sqlite3
+    import os
     from util import *
 except Exception as e:
     print(e)
-#Trecho que inicia o banco
-try:
-    nome_banco = 'database.db'
-    banco = sqlite3.connect(nome_banco)
-    cursor = banco.cursor()
-except sqlite3 as error:
-    print(f'[ERRO] NÃO FOI POSSÍVEL INICIAR O BD -> {error} <-')
+
+
+def start_db():
+    '''Trecho que inicia o banco'''
+    try:
+        CURRENT_FOLDER = os.path.dirname(__file__)
+        nome_banco = os.path.realpath(f'{CURRENT_FOLDER}/../database/database.db')
+        banco = sqlite3.connect(nome_banco)
+        return banco.cursor()
+    except Exception as error:
+        print(f'[ERRO] NÃO FOI POSSÍVEL INICIAR O BD -> {error} <-')
 
 
 
@@ -43,6 +50,7 @@ def dadosProva(id_prova, basedir = '', id_alunos = None):
 
 
     try:
+        cursor = start_db()
         #Seleciona tudo de uma linha de prova
         cursor.execute('SELECT * FROM prova WHERE id_prova=?', [id_prova])
         dados_prova = cursor.fetchall()
@@ -115,6 +123,7 @@ def obterProva(id_prova, id_aluno):
     #Número de questões, número de alternativas e gabarito
     if id_aluno != None:
         try:
+            cursor = start_db()
             cursor.execute('SELECT n_questao, opcao FROM aluno_prova WHERE id_prova=? AND id_aluno=?', [id_prova, id_aluno])
             prova = cursor.fetchall()
 
@@ -146,6 +155,7 @@ def obterQuestoesProva(id_prova, id_aluno):
     #Número de questões, número de alternativas e gabarito
     if id_aluno != None:
         try:
+            cursor = start_db()
             #Eu estou usando o "[0][0] no final, pra ele retorna, por exemplo, apenas, 4 e não [(4,)]"
             #Isso parece válido, já que sempre teremos um valor para cada
             cursor.execute('SELECT n_questoes FROM prova WHERE id_prova=?', [id_prova])

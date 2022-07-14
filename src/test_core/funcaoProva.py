@@ -1,13 +1,19 @@
 try:
-    import cv2
-    import numpy as np
+    # Python imports
     import os
     import os.path
     import sys
+
+    #Pip imports
+    import cv2
     from fpdf import FPDF
+    import numpy as np
     from PIL import ImageFont, ImageDraw, Image
-    from libQr import *
-    from dbProva import *
+
+    # Local Import
+    from dbProva import dadosProva
+    from libQr import formataQr, escreveQr
+    from util import desenhaCabecalho
 except Exception as e:
     print(e)
 

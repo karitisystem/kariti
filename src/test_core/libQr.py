@@ -1,6 +1,7 @@
 import cv2
 import pyzbar.pyzbar as pyzbar
 import pyqrcode
+import os
 
 def leQr(img):
     """
@@ -53,12 +54,12 @@ def escreveQr(texto):
     """
     code = pyqrcode.create(texto)
 
-    logo_qr = cv2.cvtColor(cv2.imread('images/logo_qr.jpg'), cv2.COLOR_BGR2RGB)
+    CURRENT_FOLDER = os.path.dirname(__file__)
+    logo_qr = cv2.cvtColor(cv2.imread(f'{CURRENT_FOLDER}/../assets/logo_qr.jpg'), cv2.COLOR_BGR2RGB)
 
     logo_h, logo_w, _ = logo_qr.shape
     
     code.png('qr.png', scale=6)
-
     img = cv2.imread('qr.png')
 
     img_h, img_w, _ = img.shape
