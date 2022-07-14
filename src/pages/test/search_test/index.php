@@ -9,7 +9,7 @@
         // Pega o valor do id da prova
 				var id_test = document.getElementById("test_name").value.split(",")[0];
 				// Envia por url qual o estado selecionado
-				ajaxRequest('getStudentTestAjax.php?sigla=' + id_test, 'retorno');
+				ajaxRequest('../../../services/get_student_test_ajax?sigla=' + id_test, 'retorno');
 			}
 
       function callLoading(txt){
@@ -27,7 +27,7 @@
         var ids = document.getElementById("test_name").value.split(",");
         var id_test = ids[0], id_class = ids[1];
         //Envia por url qual o estado selecionado
-        ajaxRequest('setDownloadTemplate.php?id_test=' + id_test + '&id_class=' + id_class + '&id_student=' + id_student, 'retornoDownloadTemplate');
+        ajaxRequest('../../../services/download_template?id_test=' + id_test + '&id_class=' + id_class + '&id_student=' + id_student, 'retornoDownloadTemplate');
         callLoading('GERANDO CARTÕES-RESPOSTA');
       }
 
@@ -82,7 +82,7 @@
 
 			//Executa um arquivo php especificado
 			function ajaxRequest(url, callbackFunction){
-				//incompat�vel com IE6 e IE5
+				//incompatível com IE6 e IE5
 				var xmlhttp;
 				if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 					xmlhttp = new XMLHttpRequest();
@@ -91,14 +91,15 @@
 					//xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 				}
 				//entender esta chamada
-				xmlhttp.onreadystatechange=function(){
-					//Esta fun��o � invocada sempre que readyState for alterado.
+				xmlhttp.onreadystatechange = function(){
+					//Esta funçãoo é invocada sempre que readyState for alterado.
 					//A propriedade readyState pode assumir os seguintes valores:
-					//0: requisi��o n�o iniciada
-					//1: conex�o estabelecida
-					//2: requisi��o enviada
-					//3: requisi��o sendo processada
-					//4: requisi��o processada e resposta pronta
+					//0: requisição não iniciada
+					//1: conexão estabelecida
+					//2: requisiçã enviada
+					//3: requisição sendo processada
+					//4: requisição processada e resposta pronta
+          console.log(xmlhttp.responseText);
 					if (xmlhttp.readyState == 4){
 						eval(callbackFunction + "('" + xmlhttp.responseText + "')");
 					}
@@ -201,7 +202,7 @@
        ?>
 
       <div class="container all">
-        <form action="view_test" method="post">
+        <form action="view_test/index.php" method="post">
           <div class="inner_container">
               <div class="title">BUSCA DE PROVA</div>
                   <select title="Selecione a prova que deseja verificar" class="input_text" id="test_name" name="id_test" onchange="preencher()">
