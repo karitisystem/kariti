@@ -1,4 +1,3 @@
-#-*- coding: utf-8 -*-
 try:
     import cv2
     import numpy as np

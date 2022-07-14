@@ -1,9 +1,11 @@
 <?php
 
+  session_start();
+
   function getIdClass($id_test){
     try{
       //define PDO - tell about the database file
-      $pdo = new PDO('sqlite:database.db');
+      $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       //write SQL
       $statement = $pdo->query("SELECT id_turma FROM prova WHERE id_prova='".$id_test."'");
@@ -25,7 +27,7 @@
   function getIdStudent($id_class){
     try{
       //define PDO - tell about the database file
-      $pdo = new PDO('sqlite:database.db');
+      $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       $sql = "SELECT id_aluno FROM aluno_turma WHERE id_turma='".$id_class."'";
 
@@ -58,7 +60,7 @@
       }
 
       //define PDO - tell about the database file
-      $pdo = new PDO('sqlite:database.db');
+      $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       //write SQL
       $statement = $pdo->query($sql. ' ORDER BY nome_aluno');
@@ -79,7 +81,6 @@
   //Passando qual sigla foi solicitada
   //Trocar estado por id_test
 	$id_test = $_GET["sigla"];
-	//$id_test = '5';
 
   $id_class = getIdClass($id_test);
   $id_student = getIdStudent($id_class);

@@ -80,7 +80,7 @@
         }
         if(vetor.length > 0){
           let ids = vetor.join('schlussel');
-          ajaxRequest('setDownloadTests.php?id_test=' + id_test + '&id_students=' + ids, 'retornoTests');
+          ajaxRequest('../../../../services/download_test?id_test=' + id_test + '&id_students=' + ids, 'retornoTests');
           callLoading('GERANDO PROVAS', 'download');
         }else {
           alert('Você não selecionou nenhum aluno!')
@@ -325,7 +325,6 @@
         return [$hit, $grade];
       }
 
-
       $vector = explode("," , $_POST['id_test']);
       $id_test = $vector[0];
       $id_class = $vector[1];
@@ -406,8 +405,11 @@
        </div>
        <!--Transforma os itens de $all_students_ids em uma string separada por , (vírgula)-->
        <button type="button" class="button" onclick="downloadTest(<?php echo $id_test.',['.implode(',', $all_students_ids  );?>])">BAIXAR PROVAS</button>
+
        <button type="button" class="button" onclick="downloadCSV([<?php echo implode(',', $all_students_ids  );?>])">BAIXAR CSV</button>
+
        <button type="button" class="button" onclick="sendEmail(<?php echo $id_test.',['.implode(',', $all_students_ids  );?>])">ENVIAR POR EMAIL</button>
+
        <button type="submit" class="button" onclick="return confirm('Deseja realmente apagar esta prova?')">DELETAR PROVA</button>
      </form>
      <a href='javascript:history.go(-1)'><img src="../../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
