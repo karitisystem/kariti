@@ -282,6 +282,7 @@
                 $sql .= ' id_aluno = '.$id_student[$i]["id_aluno"];
               }
             }
+            $sql .= ' ORDER BY nome_aluno';
 
           //Quer dizer que apenas um aluno foi selecionado
           }else{
@@ -309,6 +310,7 @@
       }
 
       function getTestResult($template, $testStudent){
+        $is_test_done = count($testStudent) <= 0 ? false : true;
         $hit = 0;
         $grade = 0;
         for($i = 0; $i < count($template); $i++){
@@ -322,7 +324,7 @@
           }
         }
 
-        return [$hit, $grade];
+        return [$hit, $grade, $is_test_done];
       }
 
       $vector = explode("," , $_POST['id_test']);
@@ -372,8 +374,9 @@
 
                  $testStudent = getTestStudent($students[$i]['id_aluno'], $id_test);
                  $vector = getTestResult($template, $testStudent);
-                 $hit = $vector[0];
-                 $grade = $vector[1];
+                 $is_test_done = $vector[2];
+                 $hit = $is_test_done ? $vector[0] : 'X' ;
+                 $grade = $is_test_done ? $vector[1] : 'X';
                  echo '<td class="align_right">'.$hit.'</td>';
                  echo '<td class="align_right">'.$grade.'</td>';
                  echo '</tr>';

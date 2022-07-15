@@ -9,11 +9,10 @@
   }
 
   // Getting settings to send email
-  $ini_file = parse_ini_file('settings.ini', true);
   $ini_file = parse_ini_file('../../../settings.ini', true);
   // Getting seting to use python in windows or linux
-  $python_w = $ini_file['SYSTEM']['python_windows_path'];
-  $python_l = $ini_file['SYSTEM']['python_linux_path'];
+  $python_w = $_SESSION['absolute_path_base'] . $ini_file['SYSTEM']['python_windows_path'];
+  $python_l = $_SESSION['absolute_path_base'] . $ini_file['SYSTEM']['python_linux_path'];
   $cut_path_l = $ini_file['SYSTEM']['cut_path_l'];
   $cut_path_w = $ini_file['SYSTEM']['cut_path_w'];
 
@@ -77,29 +76,32 @@
    	} else {
     		echo "Possível ataque de upload de arquivo!\n";
    	}
-
    	$out = array();
      echo '<br>Path: /'.$uploadfile;
      echo '<br>';
+
+     $python_function = ' ' . $_SESSION['absolute_path_base'] . 'src/test_core/correctTest.py ';
+     
+     
      //It corrects the test and return the result
      if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
-       $cmd = $python_w.' correctTest.py '.$uploadfile;
+       $cmd = $python_w. $python_function .$uploadfile;
        exec($cmd, $out);
-       // echo str_replace($cut_path_w, '',$out[0]);
-     }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
-       $cmd = $python_l.' correctTest.py '.$uploadfile;
-       exec($cmd, $out);
-       // echo str_replace($cut_path_l, '',$out[0]);
-     }
-
-     //It delete this test from our server
-    if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
-      $cmd = $python_w.' deleteFile.py '.$uploadfile;
-      exec($cmd, $out);
-    }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
-      $cmd = $python_l.' deleteFile.py '.$uploadfile;
-      exec($cmd, $out);
-    }
+      }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
+        $cmd = $python_l. $python_function .$uploadfile;
+        exec($cmd, $out);
+      }
+      
+      $python_function = ' ' . $_SESSION['absolute_path_base'] . 'src/test_core/deleteFile.py ';
+      
+      //It delete this test from our server
+      if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
+        $cmd = $python_w. $python_function .$uploadfile;
+        exec($cmd, $out);
+      }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
+        $cmd = $python_l. $python_function .$uploadfile;
+        exec($cmd, $out);
+      }
 
 
    	echo "</br><b>Qtd de itens no Array: ".sizeof($out)." </b></br></br><hr>";
@@ -111,10 +113,7 @@
         'id_student' => str_replace('id_aluno:', '', $out[1]),
         'answers' => explode(',', str_replace('resposta:', '', $out[2]))
       ];
-      /*
-      echo '<pre>';
-      echo var_dump($test_data);
-      echo '</pre>';*/
+
 
       //If this student don't have a test registered yet
       if(count(getTestStudent($test_data['id_test'], $test_data['id_student'])) == '0'){
@@ -135,6 +134,8 @@
       $z += 1;
     }
   }
+
+
   $_GET['message'] = '';
   if($x > 0){
     $_GET['message'] .= '<font color="green">'.$x.' PROVA(S) CORRIGIDA(S) COM SUCESSO!</font><br>';

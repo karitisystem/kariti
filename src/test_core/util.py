@@ -411,16 +411,39 @@ def getInfoTriang(img):
 
 
 def getPTCrop(img):
+    def getCenterOfMass(points):
+        average_x, average_y = 0, 0
+        for point in points:
+            average_x += point[0]
+            average_y += point[1]
+        
+        return [int(average_x/len(points)), int(average_y/len(points))]
 
-    points = getInfoTriang(img)[0]
+    def getDistance(points_01, points_02):
+        x1, y1 = points_01
+        x2, y2 = points_02
+        return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+
+    points_list = getInfoTriang(img)[0]
+
+    triangles_centers = []
+    for points in [p[0] for p in points_list]:
+        triangles_centers.append(getCenterOfMass(points))
+    page_center = getCenterOfMass(triangles_centers)
 
     quad = []
     comp = []
 
-    for i in points:
-        pt1, pt2, pt3 = i[0]
-        x = int((pt1[0]+pt2[0]+pt3[0])/3)
-        y = int((pt1[1]+pt2[1]+pt3[1])/3)
+    for points in points_list:
+        pt1, pt2, pt3 = points[0]
+        distances = {
+            getDistance(pt1, page_center): pt1,
+            getDistance(pt2, page_center): pt2,
+            getDistance(pt3, page_center): pt3
+        }
+
+        x = distances[min(distances.keys())][0]
+        y = distances[min(distances.keys())][1]
         quad.append([[x,y], x+y])
         comp.append(x+y)
     maior = max(comp)
@@ -531,8 +554,7 @@ def paper90(im_color):
     triangles = getInfoTriang(rotated_img)[0]
 
     #Segunda correção de ângulo
-    #[[780.0, 1457.3333333333333], [761.0, 540.0], [44.0, 1487.0], [24.666666666666668, 569.3333333333334]]
-    #[[761.0, 540.0], [24.666666666666668, 569.3333333333334], [780.0, 1457.3333333333333], [44.0, 1487.0]]
+
     sec = []
 
     for i in triangles:
@@ -578,9 +600,7 @@ def getOurSqr(im_color):
 
 
     height, width = im_crop.shape[:2]
-
     im_gray, im_bw = getImgNoColor(im_crop)
-    #im_color_guide = im_color.copy()
 
     contours, _ = cv2.findContours(cv2.threshold(im_bw, 0, 255, cv2.THRESH_BINARY_INV)[1], cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     sqr = []
@@ -670,8 +690,6 @@ def getOurSqr(im_color):
         elif not((getProportion(sqr_alt[i][0], sqr_alt[i-1][0])[1] <= threshold_2) or (getProportion(sqr_alt[i][0], sqr_alt[i+1][0])[1] <= threshold_2)):
             del sqr_alt[i]
 
-    #storeImg(im_crop)
-
     return sqr_n, sqr_alt, im_crop
 
 
@@ -708,9 +726,6 @@ def getAnswers(img):
 
 
         return circles
-
-    #img = cv2.imread('provas_scan/prt_2/prof/prova2e.png')
-    #img = cv2.imread('provas_scan/prt_2/eu/prova2e.jpg')
 
     n, alt, img_croped = getOurSqr(img)
 
@@ -813,7 +828,6 @@ def getAnswers(img):
 
     else:
         gabarito_aluno = []
-    print(gabarito_aluno)
     return gabarito_aluno
 
 
