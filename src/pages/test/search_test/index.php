@@ -15,7 +15,7 @@
       function callLoading(txt){
         const loading_html = document.getElementById('loading');
         if(loading_html.style.display === 'none'){
-          loading_html.innerHTML = '<img class="loading_gif" src="../../../assetsIcons/download.gif">' + txt;
+          loading_html.innerHTML = '<img class="loading_gif" src="../../../assets/Icons/download.gif">' + txt;
           loading_html.style.display = 'flex';
         }else{
           loading_html.style.display = 'none';
@@ -32,7 +32,8 @@
       }
 
       // Download the tamplates
-      function retornoDownloadTemplate(path){
+      function retornoDownloadTemplate(tail){
+        path = `../../../../${tail}`
         // alert('RECEBI ISSO:' + path);
         let element = document.createElement('a');
       	element.setAttribute('href', path);
@@ -48,7 +49,7 @@
 
         // Precisamos desse tempo antes do programa apagar o arquivo, pra dar tempo dele ser baixado
         // Tempo : 15s
-        ajaxRequest('deleteFile.php?path=' + path, 'retornoDelete');
+        ajaxRequest('../../../services/delete_file?path=' + tail, 'retornoDelete');
       }
 
       function retornoDelete(text){
@@ -99,7 +100,6 @@
 					//2: requisiçã enviada
 					//3: requisição sendo processada
 					//4: requisição processada e resposta pronta
-          console.log(xmlhttp.responseText);
 					if (xmlhttp.readyState == 4){
 						eval(callbackFunction + "('" + xmlhttp.responseText + "')");
 					}
