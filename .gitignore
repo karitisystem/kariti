@@ -3,3 +3,7 @@
 
 # Test
 errorHTML.html
+src/settings.ini
+
+# Cache
+**/mat_cache/
