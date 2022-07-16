@@ -47,7 +47,7 @@
         }
         let student_data = vetor.join('ergebnis');
         if(vetor.length > 0){
-          ajaxRequest('sendEmail.php?id_test=' + id_test + '&student_data=' + student_data, 'retornoSendEmail');
+          ajaxRequest('../../../../services/send_email?id_test=' + id_test + '&student_data=' + student_data, 'retornoSendEmail');
         }
         callLoading('ENVIANDO E-MAILS', 'send_email');
       }else{
@@ -87,7 +87,8 @@
         }
       }
 
-      function retornoTests(path){
+      function retornoTests(tail){
+        let path = `../../../../../${tail}`
         let element = document.createElement('a');
       	element.setAttribute('href', path);
       	element.setAttribute('download', 'Provas');
@@ -99,7 +100,7 @@
 
       	document.body.removeChild(element);
 
-        ajaxRequest('deleteFile.php?path=' + path, 'retornoDelete');
+        ajaxRequest('../../../../services/delete_file?path=' + tail, 'retornoDelete');
         callLoading();
       }
 
@@ -130,28 +131,29 @@
           }
         }
         if (j != 0){
-          ajaxRequest('setDownloadGrades.php?datas=' + datas + '&test_name=' + test_name, 'retornodownloadCSV');
+          ajaxRequest('../../../../services/download_grades?datas=' + datas + '&test_name=' + test_name, 'retornodownloadCSV');
           callLoading('GERANDO CSV', 'download');
         }else {
           alert('Você não selecionou nenhum aluno!');
         }
       }
 
-      function retornodownloadCSV(path){
-
+      function retornodownloadCSV(tail){
+        let path = `../../../../services/download_grades/${tail}`
         let element = document.createElement('a');
         element.setAttribute('href', path);
-        element.setAttribute('download', path);
-
+        element.setAttribute('download', tail);
+        
         element.style.display = 'none';
         document.body.appendChild(element);
-
+        
         element.click();
-
+        
         document.body.removeChild(element);
         // Precisamos desse tempo antes do programa apagar o arquivo, pra dar tempo dele ser baixado
         // Tempo : 15s
-        ajaxRequest('deleteFile.php?path=' + path, 'retornoDelete');
+        path = `src/services/download_grades/${tail}`
+        ajaxRequest('../../../../services/delete_file?path=' + path, 'retornoDelete');
         callLoading();
       }
 
@@ -174,6 +176,7 @@
          //2: requisi��o enviada
          //3: requisi��o sendo processada
          //4: requisi��o processada e resposta pronta
+         console.log(xmlhttp.responseText);
          if (xmlhttp.readyState == 4){
            eval(callbackFunction + "('" + xmlhttp.responseText + "')");
          }
@@ -344,7 +347,7 @@
        </div>
 
        <div class="container all container_extended">
-         <form enctype="multipart/form-data" action="setDeleteTest.php" method="POST">
+         <form enctype="multipart/form-data" action="../../../../services/delete_test/index.php" method="POST">
            <div class="title">ANÁLISE DE PROVA</div>
             <div class="inner_container">
 
@@ -375,8 +378,8 @@
                  $testStudent = getTestStudent($students[$i]['id_aluno'], $id_test);
                  $vector = getTestResult($template, $testStudent);
                  $is_test_done = $vector[2];
-                 $hit = $is_test_done ? $vector[0] : 'X' ;
-                 $grade = $is_test_done ? $vector[1] : 'X';
+                 $hit = $is_test_done ? $vector[0] : '-' ;
+                 $grade = $is_test_done ? $vector[1] : '-';
                  echo '<td class="align_right">'.$hit.'</td>';
                  echo '<td class="align_right">'.$grade.'</td>';
                  echo '</tr>';
@@ -413,7 +416,7 @@
 
        <button type="button" class="button" onclick="sendEmail(<?php echo $id_test.',['.implode(',', $all_students_ids  );?>])">ENVIAR POR EMAIL</button>
 
-       <button type="submit" class="button" onclick="return confirm('Deseja realmente apagar esta prova?')">DELETAR PROVA</button>
+       <button type="submit" class="red-button" onclick="return confirm('Deseja realmente apagar esta prova?')">DELETAR PROVA</button>
      </form>
      <a href='javascript:history.go(-1)'><img src="../../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
        <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../../assets/Icons/fechar.svg" class="icon_fechar"></a>

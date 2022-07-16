@@ -12,7 +12,7 @@
 
     		try{
     		//define PDO - tell about the database file
-    		$pdo = new PDO('sqlite:database.db');
+    		$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
     		//write SQL
     		$statement = $pdo->query("SELECT id_aluno FROM aluno_turma WHERE id_turma='".$id_class_del."'");
@@ -41,7 +41,7 @@
 
     		try{
     		//define PDO - tell about the database file
-    		$pdo = new PDO('sqlite:database.db');
+    		$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
     		//write SQL
     		$statement = $pdo->query("SELECT id_prova FROM prova WHERE id_turma='".$id_class_del."'");
@@ -74,7 +74,7 @@
         if(verifyClassStudent($id_class_del)){
         	try{
       			//define PDO - tell about the database file
-      			$pdo = new PDO('sqlite:database.db');
+      			$pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       			//Execute the query
       			$pdo->exec($sql);
@@ -93,7 +93,7 @@
         $_GET['message'] = '<font color="red">ESSA TURMA NÃO PODE SER APAGADA PORQUE ESTÁ RELACIONADO A UM OU MAIS PROVAS</font><br>';
       }
 
-      header('Location: viewClass.php?message='.$_GET['message']);
+      header('Location: ../?message='.$_GET['message']);
 
     ?>
 
