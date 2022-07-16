@@ -2,7 +2,6 @@
 
   $test_name = $_GET['test_name'];
   $datas = $_GET['datas'];
-  //echo $datas;
 
   $headers = ['Nome da Prova', 'Id do Aluno', 'Nome', 'Nota'];
 
@@ -30,6 +29,5 @@
   fclose($arquivo);
 
   echo $file_name;
-
 
  ?>

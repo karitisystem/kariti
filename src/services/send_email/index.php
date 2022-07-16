@@ -6,13 +6,16 @@
   use PHPMailer\PHPMailer\SMTP;
   use PHPMailer\PHPMailer\Exception;
 
-  require 'composer_sendemail/vendor/autoload.php';
+  require '../composer_sendemail/vendor/autoload.php';
 
   // Getting settings to send email
-  $ini_file = parse_ini_file('settings.ini', true);
+  $ini_file = parse_ini_file('../../settings.ini', true);
   $user_mail = $ini_file['MAIL']['user'];
   $user_password = $ini_file['MAIL']['password'];
   $name_mail = $ini_file['MAIL']['name'];
+
+  $cut_path_l = $ini_file['SYSTEM']['cut_path_l'];
+  $cut_path_w = $ini_file['SYSTEM']['cut_path_w'];
 
   // Getting seting to use python in windows or linux
   $python_w = $ini_file['SYSTEM']['python_windows_path'];
@@ -21,7 +24,7 @@
   function getTest($id_test){
     try{
       //define PDO - tell about the database file
-      $pdo = new PDO('sqlite:database.db');
+      $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       //write SQL
       $statement = $pdo->query("SELECT nome_prova FROM prova WHERE id_prova='".$id_test."'");
@@ -42,7 +45,7 @@
   function getStudent($id_student){
     try{
       //define PDO - tell about the database file
-      $pdo = new PDO('sqlite:database.db');
+      $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       //write SQL
       $statement = $pdo->query("SELECT nome_aluno, email_aluno FROM aluno WHERE id_aluno='".$id_student."'");
@@ -63,7 +66,7 @@
   function getUser($id_user){
     try{
       //define PDO - tell about the database file
-      $pdo = new PDO('sqlite:database.db');
+      $pdo = new PDO('sqlite:'.$_SESSION['absolute_path_base'].'src/database/database.db');
 
       //write SQL
       $statement = $pdo->query("SELECT nome FROM usuario WHERE id_usuario='".$id_user."'");
@@ -156,14 +159,15 @@
         $mail->addAddress($student_email, $student_name);     //Add a recipient
 
         //Gerating test
+        $python_function = ' ' . $_SESSION['absolute_path_base'] . 'src/test_core/baixaProvasFeitas.py ';
         if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
-          $cmd = $python_w.' baixaProvasFeitas.py '.$id_test.' '. $id_student;
+          $cmd = $python_w. $python_function .$id_test.' '. $id_student;
           exec($cmd, $out);
           $pdf_path = $out[0];
         }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
-          $cmd = $python_l.' baixaProvasFeitas.py '.$id_test.' '. $id_student;
+          $cmd = $python_l. $python_function .$id_test.' '. $id_student;
           exec($cmd, $out);
-          $pdf_path = str_replace('/var/www/html/gabarito/', '', $out[0]);
+          $pdf_path = str_replace($cut_path_l, '',$out[0]);
         }
 
         //Attachments
@@ -179,26 +183,27 @@
         if($mail->send()){
           echo '<font color="green">EMAIL PARA '.$student_name.' ENVIADO COM SUCESSO!</font><br>';
         }else{
-          echo '<font color="green">EMAIL PARA '.$student_name.' NÃO ENVIADO COM SUCESSO!</font><br>';
+          echo '<font color="red">EMAIL PARA '.$student_name.' NÃO ENVIADO COM SUCESSO!</font><br>';
         }
 
         // Delete test in pdf
+        $python_function = ' ' . $_SESSION['absolute_path_base'] . 'src/test_core/deleteFile.py ';
         if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
-          $cmd = $python_w.' deleteFile.py '.$pdf_path;
+          $cmd = $python_w . $python_function . $pdf_path;
         }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
-          $cmd = $python_l.' deleteFile.py '.$pdf_path;
+          $cmd = $python_l . $python_function . $pdf_path;
         }
         exec($cmd, $out);
 
 
       } catch (Exception $e) {
 
-        echo '<font color="green">EMAIL PARA '.$student_name.' NÃO ENVIADO COM SUCESSO!</font><br>';
+        echo '<font color="red">EMAIL PARA '.$student_name.' NÃO ENVIADO COM SUCESSO!</font><br>';
 
       }
     }
   }else{
-    echo 'A configurações email não estão corretas. Consulte o administrador do sistema.';
+    echo '<font color="red">A configurações email não estão corretas. Consulte o administrador do sistema.</font><br>';
   }
 
 

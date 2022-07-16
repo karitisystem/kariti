@@ -1,5 +1,6 @@
 <?php
 
+  session_start();
 
   function deleteTest($id_test){
     $sql_prova = "DELETE FROM prova WHERE id_prova = '".$id_test."'";
@@ -26,7 +27,7 @@
 
   $_GET['message'] = deleteTest($id_test);
 
-  header('Location: ../../../?message='.$_GET['message'])
+  header('Location: ../../pages/test/search_test?message='.$_GET['message'])
 
 
  ?>

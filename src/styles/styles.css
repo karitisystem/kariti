@@ -6,6 +6,8 @@
 	--third_color: #f9f9f9;
 	--bg_color_main: rgb(38, 38, 38);
 	--bg_color_second: rgb(51, 51, 51);
+	--danger-color-200: rgb(179, 21, 21);
+	--danger-color-400: rgb(206, 80, 80);
 	/* --bg_color_second: var(--third_color); */
 }
 
@@ -83,6 +85,22 @@ table {
 	border-radius: 40px;
 	font-weight: bold;
 	margin-bottom: 30px;
+}
+
+.red-button{
+	cursor: pointer;
+	color: #fff;
+	padding: 5px 20px;
+	border-radius: 40px;
+	margin-bottom: 30px;
+	background-color: var(--danger-color-200);
+	border:solid 2px var(--danger-color-200);
+}
+
+.red-button:hover{
+	background-color: var(--danger-color-400);
+	border:solid 2px var(--danger-color-200);
+	cursor: pointer;
 }
 
 .div_file{
