@@ -1,5 +1,5 @@
 ## Atenção
-As versões mais atuais do Kariti estão passando por atualizações e se encontram instáveis. [Clique aqui](https://github.com/karitisystem/kariti/tree/2e571d93ed7c5186439842e2b44ef48dfde94a58) para acessar a últuma versão estável.
+As versões mais atuais do Kariti estão passando por atualizações e se encontram instáveis. [Clique aqui](https://github.com/karitisystem/kariti/tree/2e571d93ed7c5186439842e2b44ef48dfde94a58) para acessar a última versão estável.
 
 # Kariti - Sistema gratuito e de códigos abertos para o suporte à correção de atividades
 ## Apresentação
