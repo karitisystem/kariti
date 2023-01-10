@@ -1,3 +1,6 @@
+## Atenção
+As versões mais atuais do Kariti estão passando por atualizações e se encontram instáveis. [Clique aqui](https://github.com/karitisystem/kariti/tree/2e571d93ed7c5186439842e2b44ef48dfde94a58) para acessar a últuma versão estável.
+
 # Kariti - Sistema gratuito e de códigos abertos para o suporte à correção de atividades
 ## Apresentação
 O Kariti é um sistema web que possibilita a criação e correção de cartões-resposta para provas objetivas. Ele também cadastra provas e relaciona cada prova a uma aluno, para que o usuário tenha o mínimo trabalho para administrar suas correções.
