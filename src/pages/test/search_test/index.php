@@ -34,7 +34,6 @@
       // Download the tamplates
       function retornoDownloadTemplate(tail){
         path = `../../../../${tail}`
-        // alert('RECEBI ISSO:' + path);
         let element = document.createElement('a');
       	element.setAttribute('href', path);
       	element.setAttribute('download', 'Provas');
