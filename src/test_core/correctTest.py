@@ -38,12 +38,7 @@ def main():
         _, answ_clear, _ = getGrades(gabarito, gabarito_aluno)
         print(f'id_prova:{qr_code_info["id_prova"]}')
         print(f'id_aluno:{qr_code_info["id_aluno"]}')
-
-        print(f'resposta:', end='')
-        for i in range(len(answ_clear)):
-            print(answ_clear[i], end='')
-            if i != len(answ_clear) - 1:
-                print(',',end='')
+        print(f'resposta:{",".join([str(answer) for answer in answ_clear])}')
 
         #########################################################################
     except Exception as e:
