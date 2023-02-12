@@ -9,11 +9,9 @@ def main():
         ######################################################################
         # TRAZ OS DADOS DA PROVA DE UM ALUNO
         ######################################################################
-        #img = cv2.imread('provas_scan/prt_2/prof/prova2e.png')
         img = cv2.imread(sys.argv[1])
         #Se não forem encontrados quatro triângulos 'homogêneos', retorna None
         a = paper90(img)
-        #print(getInfoTriang(img)[0])
         #Se for None, adiciona a err o erro correspondente
         dados = leQr(a)
         #Se código for None, adiciona a err o erro cosrrespondente
@@ -26,7 +24,7 @@ def main():
             raise Exception('THERE ARE MORE OR LESS ALTERNATIVES OR QUESTIONS GOTTEN')
         gabarito_aluno = getAnswers(a)
 
-        notas, answ_clear, warning = getGrades(gabarito, gabarito_aluno)
+        _, answ_clear, _ = getGrades(gabarito, gabarito_aluno)
         print(f'id_prova:{dados[0]}')
         print(f'id_aluno:{dados[1]}')
 

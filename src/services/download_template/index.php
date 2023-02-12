@@ -20,26 +20,23 @@
   $cmd = '';
   if($id_student != '0'){
     if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
-      $cmd = $python_w . $python_function . $id_test .' '. $id_student;
+      $cmd = "{$python_w}{$python_function}{$id_test} {$id_student}";
       exec($cmd, $out);
       echo str_replace($cut_path_w, '',$out[0]);
     }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
-      $cmd = $python_l . $python_function . $id_test .' '. $id_student;
+      $cmd = "{$python_l}{$python_function}{$id_test} {$id_student}";
       exec($cmd, $out);
       echo str_replace($cut_path_l, '',$out[0]);
     }
   }else{
     if(strtolower($ini_file['SYSTEM']['OS']) == 'windows'){
-      $cmd = $python_w . $python_function . $id_test .' '. $id_student.' 0';
+      $cmd = "{$python_w}{$python_function}{$id_test} {$id_student} 0";
       exec($cmd, $out);
       echo str_replace($cut_path_w, '',$out[0]);
     }else if(strtolower($ini_file['SYSTEM']['OS']) == 'linux'){
-      $cmd = $python_l . $python_function . $id_test .' '. $id_student.' 0';
+      $cmd = "{$python_l}{$python_function}{$id_test} {$id_student} 0";
       exec($cmd, $out);
       echo str_replace($cut_path_l, '',$out[0]);
     }
   }
-
-
-
  ?>
