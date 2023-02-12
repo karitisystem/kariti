@@ -581,7 +581,6 @@ def paper90(im_color):
             rotated_img = cv2.warpAffine(rotated_img, rotation_mat_r, (_max, _max),borderMode=cv2.BORDER_CONSTANT, borderValue=(255,255,255))
             rotated_img = rotated_img[0:height, 0:width]
 
-    #storeImg(rotated_img)
     return rotated_img
 
 def getOurSqr(im_color):
@@ -614,8 +613,8 @@ def getOurSqr(im_color):
 
     squares = formatShape(sqr)
 
-    sqr_n = []
-    sqr_alt = []
+    question_squares = []
+    alternative_squares = []
 
     threshold = 0.02
 
@@ -651,9 +650,9 @@ def getOurSqr(im_color):
         p_m1 = getCenterOfMass(squares[i])[0]
         p_m2 =  getCenterOfMass(squares[i+1])[0]
         if ((abs(p_m1 - p_m2)/max(p_m1, p_m2)) <= threshold_2):
-            sqr_n.append([squares[i], getCenterOfMass(squares[i])])
+            question_squares.append([squares[i], getCenterOfMass(squares[i])])
             if i == (len(squares) - 2):
-                sqr_n.append([squares[i+1], getCenterOfMass(squares[i+1])])
+                question_squares.append([squares[i+1], getCenterOfMass(squares[i+1])])
 
 
     squares.sort(key=lambda x: getCenterOfMass(x)[1], reverse = True)
@@ -661,36 +660,36 @@ def getOurSqr(im_color):
         p_m1 = getCenterOfMass(squares[i])[1]
         p_m2 =  getCenterOfMass(squares[i+1])[1]
         if ((abs(p_m1 - p_m2)/max(p_m1, p_m2)) <= threshold_2):
-            sqr_alt.append([squares[i], getCenterOfMass(squares[i])])
+            alternative_squares.append([squares[i], getCenterOfMass(squares[i])])
             if i == len(squares)-2:
-                sqr_alt.append([squares[i+1], getCenterOfMass(squares[i+1])])
+                alternative_squares.append([squares[i+1], getCenterOfMass(squares[i+1])])
 
 
-    sqr_n.sort(key=lambda x: x[1][0])
-    for i in range(len(sqr_n)-1, -1, -1):
-        if (i == len(sqr_n)-1):
-            if not(getProportion(sqr_n[i][0], sqr_n[i-1][0])[0] <= threshold_2):
-                del sqr_n[i]
+    question_squares.sort(key=lambda x: x[1][0])
+    for i in range(len(question_squares)-1, -1, -1):
+        if (i == len(question_squares)-1):
+            if not(getProportion(question_squares[i][0], question_squares[i-1][0])[0] <= threshold_2):
+                del question_squares[i]
         elif (i == 0):
-            if not(getProportion(sqr_n[i][0], sqr_n[i+1][0])[0] <= threshold_2):
-                del sqr_n[i]
+            if not(getProportion(question_squares[i][0], question_squares[i+1][0])[0] <= threshold_2):
+                del question_squares[i]
             #Debug: Esse +0.02 tá feio pacas
-        elif not((getProportion(sqr_n[i][0], sqr_n[i-1][0])[0] <= threshold_2) or (getProportion(sqr_n[i][0], sqr_n[i+1][0])[1] <= threshold_2)):
-            del sqr_n[i]
+        elif not((getProportion(question_squares[i][0], question_squares[i-1][0])[0] <= threshold_2) or (getProportion(question_squares[i][0], question_squares[i+1][0])[1] <= threshold_2)):
+            del question_squares[i]
 
 
-    sqr_alt.sort(key=lambda x: x[1][1])
-    for i in range(len(sqr_alt)-1, -1, -1):
-        if (i == len(sqr_alt)-1):
-            if not(getProportion(sqr_alt[i][0], sqr_alt[i-1][0])[1] <= threshold_2):
-                del sqr_alt[i]
+    alternative_squares.sort(key=lambda x: x[1][1])
+    for i in range(len(alternative_squares)-1, -1, -1):
+        if (i == len(alternative_squares)-1):
+            if not(getProportion(alternative_squares[i][0], alternative_squares[i-1][0])[1] <= threshold_2):
+                del alternative_squares[i]
         elif (i == 0):
-            if not(getProportion(sqr_alt[i][0], sqr_alt[i+1][0])[1] <= threshold_2):
-                del sqr_alt[i]
-        elif not((getProportion(sqr_alt[i][0], sqr_alt[i-1][0])[1] <= threshold_2) or (getProportion(sqr_alt[i][0], sqr_alt[i+1][0])[1] <= threshold_2)):
-            del sqr_alt[i]
+            if not(getProportion(alternative_squares[i][0], alternative_squares[i+1][0])[1] <= threshold_2):
+                del alternative_squares[i]
+        elif not((getProportion(alternative_squares[i][0], alternative_squares[i-1][0])[1] <= threshold_2) or (getProportion(alternative_squares[i][0], alternative_squares[i+1][0])[1] <= threshold_2)):
+            del alternative_squares[i]
 
-    return sqr_n, sqr_alt, im_crop
+    return question_squares, alternative_squares, im_crop
 
 
 

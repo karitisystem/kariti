@@ -10,23 +10,34 @@ def main():
         # TRAZ OS DADOS DA PROVA DE UM ALUNO
         ######################################################################
         img = cv2.imread(sys.argv[1])
-        #Se não forem encontrados quatro triângulos 'homogêneos', retorna None
+
+        # Se não forem encontrados quatro triângulos 'homogêneos', retorna None
         a = paper90(img)
-        #Se for None, adiciona a err o erro correspondente
-        dados = leQr(a)
-        #Se código for None, adiciona a err o erro cosrrespondente
-        #Número de questões, número de alternativas e gabarito
-        _, gabarito, n_qDB, n_altDB = obterProva(dados[0], dados[1])
 
+        # Se for None, adiciona a err o erro correspondente
+        qr_code_info = leQr(a)
 
-        n, alt, _ = getOurSqr(a)
-        if (len(n) != n_qDB) or (len(alt) != n_altDB):
+        if not qr_code_info:
+            raise KeyError('Não foi possível localizar as informações no QRCode.')
+
+        # Se código for None, adiciona a err o erro cosrrespondente
+        # Número de questões, número de alternativas e gabarito
+        _, gabarito, num_questions_DB, num_alternatives_DB = obterProva(
+            id_aluno=qr_code_info["id_aluno"],
+            id_prova=qr_code_info["id_prova"],
+        )
+
+        question_squares, alternative_squares, _ = getOurSqr(a)
+        if (
+            len(question_squares) != num_questions_DB) or\
+            (len(alternative_squares) != num_alternatives_DB
+        ):
             raise Exception('THERE ARE MORE OR LESS ALTERNATIVES OR QUESTIONS GOTTEN')
         gabarito_aluno = getAnswers(a)
 
         _, answ_clear, _ = getGrades(gabarito, gabarito_aluno)
-        print(f'id_prova:{dados[0]}')
-        print(f'id_aluno:{dados[1]}')
+        print(f'id_prova:{qr_code_info["id_prova"]}')
+        print(f'id_aluno:{qr_code_info["id_aluno"]}')
 
         print(f'resposta:', end='')
         for i in range(len(answ_clear)):

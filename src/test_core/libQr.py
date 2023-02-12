@@ -3,7 +3,7 @@ import pyzbar.pyzbar as pyzbar
 import pyqrcode
 import os
 
-def leQr(img):
+def leQr(img) -> dict:
     """
     Dada uma imagem, a função retorna:
         *A informação contida no QRcode
@@ -12,11 +12,10 @@ def leQr(img):
 
     """
 
-    #im_gray, im_bw = getImgNoColor(img)
     im_gray = cv2.split(cv2.cvtColor(img, cv2.COLOR_BGR2HSV))[2]
     _, im_bw = cv2.threshold(im_gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY)
 
-    final = []
+    final = {}
 
     try:
         qr_info = pyzbar.decode(im_bw)
@@ -24,24 +23,25 @@ def leQr(img):
         for obj in qr_info:
             text = obj.data
 
-        #texto com formatação
+        # Texto com formatação
         new_text = text.decode('utf-8')
         if len(new_text) != 40:
             new_text = None
         else:
-            new_text = new_text.replace('#', '')#Substitui os "#" por null
-            #Esse if verifica se o primeiro número e o segundo número podem ser convetidos para numeral
-            if ((new_text.split('.')[0].isdigit())and(new_text.split('.')[1].isdigit())):
-                id_prova = int(new_text.split('.')[0])
-                id_aluno = int(new_text.split('.')[1])
-                final.append(id_prova)
-                final.append(id_aluno)
-                #new_text = int(new_text.)#transforma o texto obtido em int
-            else:
-                final.append(None)
-    except:
-        #print('Código QR não pode ser lido ou encontrado')
-        final.append(None)
+            new_text = new_text.replace('#', '') # Substitui os "#" por null
+            id_prova = new_text.split('.')[0]
+            id_aluno = new_text.split('.')[1]
+
+            # Esse if verifica se o primeiro número e o segundo número podem
+            # ser convetidos para numeral
+            if ((id_prova.isdigit()) and (id_aluno.isdigit())):
+                final = {
+                    'id_prova': int(id_prova),
+                    'id_aluno': int(id_aluno)
+                }
+    except Exception as error:
+        print(f'Something went wrong!\n{error}')
+        
     #retorna apenas o texto contido
     return final
 
