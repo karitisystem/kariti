@@ -31,47 +31,11 @@ Agora vamos iniciar instalando as bibliotecas necessárias do python. Para isso 
 ~~~cmd
 my_env_w\Scripts\activate
 ~~~
-Agora vamos utilizar o pip, dentro da nossa máquina virtual, vamos instalar as bibliotecas:
-* #### [OpenCV](https://opencv.org/)
-Digite:
+Agora vamos utilizar o pip, dentro da nossa máquina virtual, vamos instalar as bibliotecas necessárias para o funcionamento do sistema. Para isso, dentro da pasta `kariti`, basta digitar o seguinte comando:
 ~~~cmd
-pip install opencv-python
+pip install -r requirements.txt
 ~~~
-* #### [FPDF for Python](https://pyfpdf.readthedocs.io/en/latest/)
-Digite:
-~~~cmd
-pip install fpdf
-~~~
-* #### [Pillow](https://pypi.org/project/Pillow/)
-Digite:
-~~~cmd
-pip install Pillow
-~~~
-* #### [PyZBar](https://pypi.org/project/pyzbar/)
-Digite:
-~~~cmd
-pip install pyzbar
-~~~
-* #### [PyQRCode](https://pypi.org/project/PyQRCode/)
-Digite:
-~~~cmd
-pip install PyQRCode
-~~~
-* #### [Matplotlib](https://matplotlib.org/)
-Digite:
-~~~cmd
-pip install matplotlib
-~~~
-* #### [pypng](https://pypi.org/project/pypng/)
-Digite:
-~~~cmd
-pip install pypng
-~~~
-* #### [pysqlite](https://pypi.org/project/pysqlite/)
-Digite:
-~~~cmd
-pip install pysqlite
-~~~
+
 
 O [Composer](https://getcomposer.org/) e o [PHPMailer](https://github.com/PHPMailer/PHPMailer) são duas depedências importantes para o sistema, mas não precisam ser instaladas porque já veem implementadas.
 
