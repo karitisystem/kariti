@@ -28,8 +28,14 @@ Após a instalação do módulo, vamos criar a máquina virtual nessa pasta e ch
 virtualenv my_env_w
 ~~~
 Agora vamos iniciar instalando as bibliotecas necessárias do python. Para isso vamos ativar a nossa máquina virtual. Com o terminal ainda no diretório **my_envs** digite:
+
+Windows:
 ~~~cmd
 my_env_w\Scripts\activate
+~~~
+Linux:
+~~~cmd
+source my_env_w/bin/activate
 ~~~
 Agora vamos utilizar o pip, dentro da nossa máquina virtual, vamos instalar as bibliotecas necessárias para o funcionamento do sistema. Para isso, dentro da pasta `kariti`, basta digitar o seguinte comando:
 ~~~cmd
