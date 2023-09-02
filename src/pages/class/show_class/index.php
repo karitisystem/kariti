@@ -113,7 +113,7 @@
           ?>
         </div>
         <a href='../../menu'><img src="../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
-        <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
+        <a href='../../../services/disconect' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
       </div>
     </section>
   </body>

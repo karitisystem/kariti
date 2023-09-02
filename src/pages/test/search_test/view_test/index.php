@@ -419,7 +419,7 @@
        <button type="submit" class="red-button" onclick="return confirm('Deseja realmente apagar esta prova?')">DELETAR PROVA</button>
      </form>
      <a href='javascript:history.go(-1)'><img src="../../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
-       <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
+       <a href='../../../../services/disconect' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
      </div>
    </section>
   </body>

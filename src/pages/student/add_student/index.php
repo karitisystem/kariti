@@ -79,12 +79,11 @@
                 <input type="email" class="input_text" placeholder="Email do aluno" name="email_student" required>
 
                 <input type="number" class="input_text" placeholder="Nº de matrícula do aluno" name="reg_student" required>
-
             </div>
             <button class="button" type="submit">CADASTRAR ALUNO</button>
         </form>
         <a href='../../menu'><img src="../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
-        <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
+        <a href='../../../services/disconect' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
       </div>
     </section>
   </body>

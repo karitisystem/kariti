@@ -294,7 +294,7 @@
             <button class="button" onclick="return confirm('Deseja salvar as alterações?');" type="submit">ATUALIZAR TURMA</button>
         </form>
         <a href='../'><img src="../../../../assets/Icons/voltar.svg" class="icon_voltar"></a>
-        <a href='desconectar.php' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
+        <a href='../../../../services/disconect' onclick="return confirm('Tem certeza que deseja sair?')"><img src="../../../../assets/Icons/fechar.svg" class="icon_fechar"></a>
       </div>
     </section>
   </body>
