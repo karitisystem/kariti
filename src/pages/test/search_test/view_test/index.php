@@ -402,7 +402,6 @@
                // Id test
                echo '<input type="hidden" name="id_test" value="'.$id_test.'">';
 
-
               ?>
               <div class="caption">
               <input onchange="markAll([<?php echo implode(',', $all_students_ids);?>])" type = "checkbox" name="my_check" id = "my_check">
@@ -414,7 +413,7 @@
 
        <button type="button" class="button" onclick="downloadCSV([<?php echo implode(',', $all_students_ids  );?>])">BAIXAR CSV</button>
 
-       <button type="button" class="button" onclick="sendEmail(<?php echo $id_test.',['.implode(',', $all_students_ids  );?>])">ENVIAR POR EMAIL</button>
+       <button type="button" class="button" onclick="sendEmail(<?php echo $id_test.',['.implode(',', $all_students_ids  );?>])" disabled title="Esta função está temporariamente desabilitada.">ENVIAR POR EMAIL</button>
 
        <button type="submit" class="red-button" onclick="return confirm('Deseja realmente apagar esta prova?')">DELETAR PROVA</button>
      </form>
