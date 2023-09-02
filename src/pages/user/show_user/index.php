@@ -92,7 +92,7 @@
             
             if($rows[$i]['id_usuario'] != '1'){
               echo '<td>';
-              echo '<a onclick="return confirm(\'Deseja realmente apagar '.$rows[$i]["nome"].'?\');" href="deleteUser.php?id_user='.$rows[$i]['id_usuario'].'"><img src="../../../assets/Icons/excluir.svg" height=20> </a>';
+              echo '<a onclick="return confirm(\'Deseja realmente apagar '.$rows[$i]["nome"].'?\');" href="delete_user/settings.php?id_user='.$rows[$i]['id_usuario'].'"><img src="../../../assets/Icons/excluir.svg" height=20> </a>';
               echo '</td>';
             }else {
               echo '</td>';
