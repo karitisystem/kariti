@@ -1,6 +1,3 @@
-## Atenção
-As versões mais atuais do Kariti estão passando por atualizações e se encontram instáveis. [Clique aqui](https://github.com/karitisystem/kariti/tree/2e571d93ed7c5186439842e2b44ef48dfde94a58) para acessar a última versão estável.
-
 # Kariti - Sistema gratuito e de códigos abertos para o suporte à correção de atividades
 ## Apresentação
 O Kariti é um sistema web que possibilita a criação e correção de cartões-resposta para provas objetivas. Ele também cadastra provas e relaciona cada prova a uma aluno, para que o usuário tenha o mínimo trabalho para administrar suas correções.
@@ -10,36 +7,41 @@ O Kariti é um sistema web que possibilita a criação e correção de cartões-
 O sistema foi projetado para funcionar no sistema operacional Windows, mas roda perfeitamente em computadores Linux. Para instalar o sistema, é preciso possuir um servidor local, para isso usaremos o [**WAMP**](https://www.google.com/search?q=WAMPSERVER&sa=X&ved=2ahUKEwiUsLbTsbjwAhVEIbkGHc_wDPoQ7xYoAHoECAEQNQ&biw=1920&bih=975). Baixe e instale o WAMP na sua máquina.
 Após instalar o WAMP e coloque a pasta contendo o Kariti dentro da pasta **www**.
 Agora precisamos mudar o arquivo **php.ini** contido dentro do apache do Wamp. dentro da pasta do Wamp, navegue pelo diretório **\bin\apache\apache2.4.46\bin\\** (talvez o seu não seja apache2.4.46, atente-se a isso), aqui você pode abrir com o bloco de notas o arquivo **php**, nele você vai mudar a configurção de 3 chaves, conforme mostradao a frente:
-* post_max_size = 100M
+1. post_max_size = 100M
 
-* upload_max_filesize = 100M
+2. upload_max_filesize = 100M
 
-* max_file_uploads = 90
+3. max_file_uploads = 90
 
 Salve o arquivo e feche-o. Caso esse procedimento não seja feito, o número de imagens corrigidas por vez estará limitado.
 
 * ### Instalando a máquina virtual com o Python
-Antes de começar, certifique-se que há instalado na máquina que servirá como servidor, o pip e o Python 3.8.5 ou superior. Talvez sua máquina não reconheça o pip e o python como comandos externos, pra isso você precisar adicionar o path do python ao sistema, [clique aqui](https://dicasdepython.com.br/resolvido-pip-nao-e-reconhecido-como-um-comando-interno/#:~:text=Uma%20situa%C3%A7%C3%A3o%20que%20pode%20acontecer,gente%20usa%20o%20pr%C3%B3prio%20python.) para seguir um tutorial. Em seguida, dentro da pasta Kariti, crie uma pasta onde colocaremos nossa virtual env, ela se chamará **my_envs**. Abra o terminal dentro dessa pasta e instale o módulo responsável por criar a máquina virtual, usando:
+Antes de começar, certifique-se que há instalado na máquina que servirá como servidor, o pip e o Python 3.8.5 (versão mínima) ou alguma até a 3.10.3 (versão máxima), outra versão fora desse intervalo pode causar incompatibilidade com as bibliotecas utilizadas. Talvez sua máquina não reconheça o pip e o python como comandos externos, pra isso você precisar adicionar o path do python ao sistema, [clique aqui](https://dicasdepython.com.br/resolvido-pip-nao-e-reconhecido-como-um-comando-interno/#:~:text=Uma%20situa%C3%A7%C3%A3o%20que%20pode%20acontecer,gente%20usa%20o%20pr%C3%B3prio%20python.) para seguir um tutorial. Em seguida, dentro da pasta Kariti, crie uma pasta onde colocaremos nossa virtual env, ela se chamará **my_envs**. Abra o terminal dentro da pasta que acabou de criar (**my_envs**) e instale o módulo responsável por criar a máquina virtual (caso ainda não tenha-o instalado), usando:
 ~~~cmd
 pip install virtualenv
 ~~~
-Após a instalação do módulo, vamos criar a máquina virtual nessa pasta e chamá-la de **my_env_w**, para isso usaremos:
+Após a instalação do módulo, vamos criar a máquina virtual nessa pasta e chamá-la de **my_env_w** (Windows) ou **my_env_w** (Linux), para isso usaremos:<BR>
+Para o Windows:
+~~~cmd
+virtualenv my_env_w
+~~~
+Para o Linux:
 ~~~cmd
 virtualenv my_env_w
 ~~~
 Agora vamos iniciar instalando as bibliotecas necessárias do python. Para isso vamos ativar a nossa máquina virtual. Com o terminal ainda no diretório **my_envs** digite:
 
-Windows:
+Windows (Powersheel):
 ~~~cmd
 my_env_w\Scripts\activate
 ~~~
-Linux:
+Linux (Bash):
 ~~~cmd
-source my_env_w/bin/activate
+source my_env_l/bin/activate
 ~~~
 Agora vamos utilizar o pip, dentro da nossa máquina virtual, vamos instalar as bibliotecas necessárias para o funcionamento do sistema. Para isso, dentro da pasta `kariti`, basta digitar o seguinte comando:
 ~~~cmd
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 ~~~
 
 
